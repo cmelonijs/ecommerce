@@ -1,4 +1,4 @@
-import logo from "../../logo.svg"
+import logo from "../../assets/images/logo.png"
 
 const Navbar = () => {
   return (
@@ -12,7 +12,7 @@ const Navbar = () => {
         <div>
           <img
             style={{ maxWidth: "5rem", maxHeight: "5rem", margin: "1rem 0" }}
-            src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/online-shop-ecommerce-logo-app-icon-logo-design-template-910c781293690546d77a3828f9e901ee_screen.jpg?ts=1611442808"
+            src={logo}
             alt="store"
           />
         </div>
