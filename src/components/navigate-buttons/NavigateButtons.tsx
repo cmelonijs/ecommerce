@@ -1,7 +1,12 @@
 import { Button } from "@material-tailwind/react"
 import clothes from "../../assets/images/clothes.jpg"
+import { filterProducts } from "../../features/slices/productSlice"
+import { useDispatch } from "react-redux"
+import { Link } from "react-router-dom"
 
 const NavigateButtons = () => {
+  const dispatch = useDispatch()
+
   const buttons = [
     "Hoodies",
     "Dresses",
@@ -17,15 +22,18 @@ const NavigateButtons = () => {
       <div className="flex items-center justify-center py-8">
         {buttons.map((button) => (
           <div key={button} className="mr-4">
-            <Button
-              color="gray"
-              size="lg"
-              variant="outlined"
-              ripple={true}
-              className="hover:bg-green-300 duration-300 ease-in-out"
-            >
-              {button}
-            </Button>
+            <Link to={`/filtered-products/${button}`}>
+              <Button
+                color="gray"
+                size="lg"
+                variant="outlined"
+                ripple={true}
+                className="hover:bg-green-300 duration-300 ease-in-out"
+                onClick={() => dispatch(filterProducts(button))}
+              >
+                {button}
+              </Button>
+            </Link>
           </div>
         ))}
       </div>
