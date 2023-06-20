@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { storeData } from "../../assets/data/dummyData"
 
-interface Product {
+export interface Product {
   id: string
   img: string
   name: string
