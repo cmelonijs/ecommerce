@@ -3,9 +3,14 @@ import { useParams } from "react-router-dom"
 import { Product } from "../../features/slices/productSlice"
 import { useState } from "react"
 import { Button, Tooltip } from "@material-tailwind/react"
+import { addToCart } from "../../features/slices/cartSlice"
+import { useDispatch } from "react-redux"
 
 const SingleProduct = () => {
+  const dispatch = useDispatch()
+
   const product = useSelector((state: any) => state.products.singleProduct)
+  console.log("which product", product)
   const { id } = useParams()
   const productSize = product[0].size ? product[0].size[0] : ""
   const [size, setSize] = useState(productSize)
@@ -34,6 +39,9 @@ const SingleProduct = () => {
                 <p className="text-gray-700 text-xl font-bold tracking-normal leading-none pb-4">
                   {item.text}
                 </p>
+                <p className="text-gray-700 text-xl font-bold tracking-normal leading-none pb-4">
+                  {item.price}
+                </p>
                 <div className="pb-4">
                   {item.size && (
                     <div>
@@ -59,6 +67,17 @@ const SingleProduct = () => {
                       size="lg"
                       ripple={true}
                       variant="outlined"
+                      onClick={() =>
+                        dispatch(
+                          addToCart({
+                            id: item.id,
+                            price: item.price,
+                            size: size,
+                            name: item.name,
+                            amount: 1,
+                          }),
+                        )
+                      }
                     >
                       Add to cart
                     </Button>

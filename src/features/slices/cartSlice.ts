@@ -3,15 +3,15 @@ import { createSlice } from "@reduxjs/toolkit"
 interface State {
   cart: any[]
   amount: number
-  totalamount: number
-  totalprice: number
+  totalAmount: number
+  totalPrice: number
 }
 
 const initialState: State = {
   cart: [],
   amount: 0,
-  totalamount: 0,
-  totalprice: 0,
+  totalAmount: 0,
+  totalPrice: 0,
 }
 
 export const cartSlice = createSlice({
@@ -27,8 +27,8 @@ export const cartSlice = createSlice({
         if (exists) {
           exists.amount++
           exists.totalPrice += productId.price
-          state.totalamount++
-          state.totalprice += productId.price
+          state.totalAmount++
+          state.totalPrice += productId.price
         } else {
           state.cart.push({
             id: productId.id,
@@ -38,8 +38,8 @@ export const cartSlice = createSlice({
             totalPrice: productId.price,
             name: productId.name,
           })
-          state.totalamount++
-          state.totalprice += productId.price
+          state.totalAmount++
+          state.totalPrice += productId.price
         }
       } catch (err) {
         console.log(err)
