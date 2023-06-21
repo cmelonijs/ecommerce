@@ -15,11 +15,13 @@ export interface Product {
 
 interface State {
   filteredProducts: Product[] | any[]
+  singleProduct: Product | any
 }
 
 const initialState: State = {
   filteredProducts:
     JSON.parse(sessionStorage.getItem("filteredProducts")!) || storeData,
+  singleProduct: JSON.parse(sessionStorage.getItem("singleProduct")!) || {},
 }
 
 export const productSlice = createSlice({
@@ -34,10 +36,24 @@ export const productSlice = createSlice({
         state.filteredProducts = filter
         const saveState = JSON.stringify(filter)
         sessionStorage.setItem("filteredProducts", saveState)
-      } catch (err) {}
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    singleProduct: (state, action) => {
+      try {
+        const singleProduct = storeData.filter((product) => {
+          return product.id === action.payload
+        })
+        state.singleProduct = singleProduct
+        const saveState = JSON.stringify(singleProduct)
+        sessionStorage.setItem("singleProduct", saveState)
+      } catch (err) {
+        console.log(err)
+      }
     },
   },
 })
 
-export const { filterProducts } = productSlice.actions
+export const { filterProducts, singleProduct } = productSlice.actions
 export default productSlice.reducer
